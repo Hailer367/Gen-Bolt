@@ -12,7 +12,6 @@ ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 
-
 # ---- build stage ----
 FROM base AS build
 WORKDIR /app
@@ -28,14 +27,15 @@ ENV VITE_PUBLIC_APP_URL=${VITE_PUBLIC_APP_URL}
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm fetch
 
-# Copy source and build
+# Copy source and install all dependencies
 COPY . .
 RUN pnpm install --offline --frozen-lockfile
+
+# Build the Remix app
 RUN NODE_OPTIONS=--max-old-space-size=4096 pnpm run build
 
 # Keep only production deps
 RUN pnpm prune --prod --ignore-scripts
-
 
 # ---- runtime stage ----
 FROM base AS runtime
@@ -45,7 +45,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOST=0.0.0.0
 
-# Copy only what we need
+# Copy only the necessary files from build
 COPY --from=build /app/build /app/build
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/package.json /app/package.json
@@ -58,7 +58,6 @@ HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=5 \
 
 # Start the Remix server
 CMD ["pnpm", "start"]
-
 
 # ---- development stage ----
 FROM build AS development
@@ -92,4 +91,5 @@ ENV GROQ_API_KEY=${GROQ_API_KEY} \
     DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX} \
     RUNNING_IN_DOCKER=true
 
+# Run development server
 CMD ["pnpm", "dev", "--host"]

@@ -1,7 +1,4 @@
-import {
-  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
-  vitePlugin as remixVitePlugin,
-} from '@remix-run/dev';
+import { vitePlugin as remixVitePlugin } from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
@@ -48,8 +45,7 @@ export default defineConfig((config) => {
         },
       },
 
-      // 🌀 Remix + Cloudflare Integration
-      config.mode !== 'test' && remixCloudflareDevProxy(),
+      // 🌀 Remix + Vercel Integration
       remixVitePlugin({
         future: {
           v3_fetcherPersist: true,
@@ -82,16 +78,11 @@ export default defineConfig((config) => {
       },
     },
 
-    // ✅ Server Configuration (Important for Render deployment)
+    // ✅ Server Configuration (Important for Vercel development)
     server: {
-      host: true, // allow access from Docker / Render / Codespaces
+      host: true, // allow access from Docker / Vercel / Codespaces
       port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
       strictPort: false,
-
-      // ✅ Permanent fix: Allow all subdomains automatically
-      allowedHosts: [
-        "*", // Allows any Render/Bolt/Codespace host dynamically
-      ],
 
       // ✅ Enable CORS for dev environments
       cors: true,

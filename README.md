@@ -51,22 +51,41 @@ Gen Bolt includes **ALL** the features from the original bolt.diy:
 - **Docker Support** - Containerized deployment options
 - **MCP Integration** - Model Context Protocol support
 
-## 🏗️ Deployment on Render
+## 🚀 Deployment on Vercel
 
-Gen Bolt is optimized for deployment on **Render** with the following configuration:
+Gen Bolt is optimized for deployment on **Vercel** with zero configuration. The project includes all necessary configuration files for seamless deployment.
 
-### Build Command
+### Quick Deploy to Vercel
+
+#### Option 1: Deploy Button (Recommended)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Hailer367/Gen-Bolt)
+
+#### Option 2: Manual Deployment
+1. Fork this repository to your GitHub account
+2. Sign in to [Vercel](https://vercel.com) with your GitHub account
+3. Click "New Project" and import your forked repository
+4. Vercel will automatically detect the Remix framework
+5. Add your environment variables (see below)
+6. Click "Deploy"
+
+#### Option 3: Vercel CLI
 ```bash
-npm install && npm run build
-```
+# Install Vercel CLI globally
+npm i -g vercel
 
-### Start Command  
-```bash
-npm start
+# Clone and navigate to project
+git clone https://github.com/Hailer367/Gen-Bolt.git
+cd Gen-Bolt
+
+# Deploy to Vercel
+vercel
+
+# Deploy to production
+vercel --prod
 ```
 
 ### Environment Variables
-Gen Bolt requires API keys for the AI providers you want to use. Set these in Render's Environment tab:
+Gen Bolt requires API keys for the AI providers you want to use. Set these in Vercel's Project Settings → Environment Variables:
 
 ```bash
 # Essential AI Providers
@@ -78,21 +97,36 @@ GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key_here
 GROQ_API_KEY=your_groq_api_key_here
 MISTRAL_API_KEY=your_mistral_api_key_here
 COHERE_API_KEY=your_cohere_api_key_here
-# ... add other provider keys as needed
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+XAI_API_KEY=your_xai_api_key_here
+TOGETHER_API_KEY=your_together_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+HuggingFace_API_KEY=your_huggingface_api_key_here
+HYPERBOLIC_API_KEY=your_hyperbolic_api_key_here
+OPEN_ROUTER_API_KEY=your_openrouter_api_key_here
+MOONSHOT_API_KEY=your_moonshot_api_key_here
 
 # Application Settings
 NODE_ENV=production
-PORT=10000
 ```
 
-### Render Service Configuration
-1. **Service Type**: Web Service
-2. **Build Command**: `npm install --legacy-peer-deps && npm run build`  
-3. **Start Command**: `npm start`
-4. **Node Version**: 18+ (specified in package.json engines)
-5. **Health Check**: Automatic via port binding
+### Vercel Configuration
+The project includes a `vercel.json` file with optimized settings:
 
-**Important Note**: Use `--legacy-peer-deps` flag for npm to resolve peer dependency conflicts between Remix and Wrangler versions.
+- **Build Command**: `npm run vercel-build` (optimized Remix build)
+- **Output Directory**: `build/client` (static assets)
+- **Server Functions**: Node.js 20.x runtime with 30s timeout
+- **Caching**: Optimized cache headers for static assets
+- **Security**: Security headers included (XSS protection, etc.)
+
+### Automatic Features on Vercel
+✅ **Zero Configuration** - Vercel automatically detects Remix  
+✅ **Edge Network** - Global CDN for fast loading  
+✅ **Serverless Functions** - Automatic scaling  
+✅ **Git Integration** - Auto-deploy on push  
+✅ **Preview Deployments** - Deploy previews for pull requests  
+✅ **Custom Domains** - Easy domain setup  
+✅ **SSL/HTTPS** - Automatic HTTPS certificates
 
 ## 🛠️ Local Development
 
@@ -151,21 +185,18 @@ ANTHROPIC_API_KEY=your_key_here
 
 ## 🚀 Deployment Options
 
-### Render (Recommended)
+### Vercel (Recommended)
 1. Fork this repository
-2. Connect to Render
-3. Set build command: `npm install --legacy-peer-deps && npm run build`
-4. Set start command: `npm start`
-5. Add environment variables (see list above)
-6. Deploy!
+2. Connect to Vercel Dashboard
+3. Import your repository
+4. Add environment variables in Project Settings
+5. Deploy automatically!
 
-**Note**: If you encounter peer dependency conflicts during build, ensure you use the `--legacy-peer-deps` flag with npm install.
-
-### Other Platforms
-- **Vercel**: `npm run deploy:vercel`
-- **Netlify**: `npm run deploy:netlify`  
-- **GitHub Pages**: `npm run deploy:github`
-- **Docker**: `docker-compose up`
+### Alternative Platforms
+- **Netlify**: Manual configuration required
+- **Railway**: Node.js deployment
+- **Fly.io**: Docker-based deployment
+- **Docker**: `docker-compose up` (development only)
 
 ## 🤝 Contributing
 

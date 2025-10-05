@@ -14,18 +14,16 @@
     "build": "remix vite:build",
     "start": "remix-serve ./build",
     "dev": "node pre-start.cjs && remix vite:dev --host",
-    "deploy": "npm run build && wrangler pages deploy",
+    "deploy": "vercel --prod",
     "test": "vitest --run",
     "test:watch": "vitest",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint app",
     "lint:fix": "npm run lint -- --fix && prettier app --write",
     "typecheck": "tsc",
-    "typegen": "wrangler types",
+
     "prepare": "husky",
     "clean": "node scripts/clean.js",
-    "render:build": "npm install --legacy-peer-deps && npm run build",
-    "render:start": "npm start",
-    "heroku-postbuild": "npm run build",
+    "vercel-build": "remix vite:build",
     "electron:dev": "node scripts/electron-dev.mjs",
     "electron:dev:inspect": "NODE_ENV=development electron --inspect=9229 build/electron/main/index.mjs",
     "electron:build:deps": "concurrently \"pnpm electron:build:main\" \"pnpm electron:build:preload\" --kill-others-on-fail",
@@ -91,8 +89,7 @@
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.4",
-    "@remix-run/cloudflare": "^2.15.2",
-    "@remix-run/cloudflare-pages": "^2.15.2",
+
     "@remix-run/node": "^2.15.2",
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",
@@ -159,7 +156,7 @@
   },
   "devDependencies": {
     "@blitz/eslint-plugin": "0.1.0",
-    "@cloudflare/workers-types": "^4.20241127.0",
+
     "@electron/notarize": "^2.5.0",
     "@iconify-json/ph": "^1.2.1",
     "@iconify/types": "^2.0.0",
@@ -201,7 +198,7 @@
     "vite-plugin-optimize-css-modules": "^1.1.0",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^2.1.7",
-    "wrangler": "^4.5.1"
+
   },
   "resolutions": {
     "@typescript-eslint/utils": "^8.0.0-alpha.30"

@@ -7,10 +7,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Enable pnpm
+# Set up npm for Render compatibility (Render uses npm by default)
+RUN npm config set fund false
+RUN npm config set audit false
+
+# Enable pnpm for development (optional)
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
+
+# Set PORT environment for Render
+ENV PORT=10000
 
 # ---- build stage ----
 FROM base AS build

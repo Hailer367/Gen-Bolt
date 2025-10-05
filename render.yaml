@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: gen-bolt
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY  
+        sync: false
+      - key: GOOGLE_GENERATIVE_AI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: MISTRAL_API_KEY
+        sync: false
+      - key: COHERE_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: XAI_API_KEY
+        sync: false
+      - key: TOGETHER_API_KEY
+        sync: false
+      - key: PERPLEXITY_API_KEY
+        sync: false
+      - key: HuggingFace_API_KEY
+        sync: false
+      - key: HYPERBOLIC_API_KEY
+        sync: false
+      - key: OPEN_ROUTER_API_KEY
+        sync: false
+      - key: MOONSHOT_API_KEY
+        sync: false

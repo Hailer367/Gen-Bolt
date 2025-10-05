@@ -82,10 +82,10 @@ export default defineConfig((config) => {
       },
     },
 
-    // ✅ Server Configuration (Important)
+    // ✅ Server Configuration (Important for Render deployment)
     server: {
       host: true, // allow access from Docker / Render / Codespaces
-      port: 3000,
+      port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
       strictPort: false,
 
       // ✅ Permanent fix: Allow all subdomains automatically
@@ -104,7 +104,7 @@ export default defineConfig((config) => {
 
     // ✅ Optional Preview config (when running vite preview)
     preview: {
-      port: 4173,
+      port: process.env.PORT ? parseInt(process.env.PORT) : 4173,
       allowedHosts: ["*"],
       host: true,
     },

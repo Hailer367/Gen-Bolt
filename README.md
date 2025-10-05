@@ -1,493 +1,206 @@
-# bolt.diy
-
-[![bolt.diy: AI-Powered Full-Stack Web Development in the Browser](./public/social_preview_index.jpg)](https://bolt.diy)
-
-Welcome to bolt.diy, the official open source version of Bolt.new, which allows you to choose the LLM that you use for each prompt! Currently, you can use OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, Groq, Cohere, Together, Perplexity, Moonshot (Kimi), Hyperbolic, GitHub Models, Amazon Bedrock, and OpenAI-like providers - and it is easily extended to use any other model supported by the Vercel AI SDK! See the instructions below for running this locally and extending it to include more models.
-
------
-Check the [bolt.diy Docs](https://stackblitz-labs.github.io/bolt.diy/) for more official installation instructions and additional information.
-
------
-Also [this pinned post in our community](https://thinktank.ottomator.ai/t/videos-tutorial-helpful-content/3243) has a bunch of incredible resources for running and deploying bolt.diy yourself!
-
-We have also launched an experimental agent called the "bolt.diy Expert" that can answer common questions about bolt.diy. Find it here on the [oTTomator Live Agent Studio](https://studio.ottomator.ai/).
-
-bolt.diy was originally started by [Cole Medin](https://www.youtube.com/@ColeMedin) but has quickly grown into a massive community effort to build the BEST open source AI coding assistant!
-
-## Table of Contents
-
-- [Join the Community](#join-the-community)
-- [Recent Major Additions](#recent-major-additions)
-- [Features](#features)
-- [Setup](#setup)
-- [Quick Installation](#quick-installation)
-- [Manual Installation](#manual-installation)
-- [Configuring API Keys and Providers](#configuring-api-keys-and-providers)
-- [Setup Using Git (For Developers only)](#setup-using-git-for-developers-only)
-- [Available Scripts](#available-scripts)
-- [Contributing](#contributing)
-- [Roadmap](#roadmap)
-- [FAQ](#faq)
-
-## Join the community
-
-[Join the bolt.diy community here, in the oTTomator Think Tank!](https://thinktank.ottomator.ai)
-
-## Project management
-
-Bolt.diy is a community effort! Still, the core team of contributors aims at organizing the project in way that allows
-you to understand where the current areas of focus are.
-
-If you want to know what we are working on, what we are planning to work on, or if you want to contribute to the
-project, please check the [project management guide](./PROJECT.md) to get started easily.
-
-## Recent Major Additions
-
-### ✅ Completed Features
-- **19+ AI Provider Integrations** - OpenAI, Anthropic, Google, Groq, xAI, DeepSeek, Mistral, Cohere, Together, Perplexity, HuggingFace, Ollama, LM Studio, OpenRouter, Moonshot, Hyperbolic, GitHub Models, Amazon Bedrock, OpenAI-like
-- **Electron Desktop App** - Native desktop experience with full functionality
-- **Advanced Deployment Options** - Netlify, Vercel, and GitHub Pages deployment
-- **Supabase Integration** - Database management and query capabilities
-- **Data Visualization & Analysis** - Charts, graphs, and data analysis tools
-- **MCP (Model Context Protocol)** - Enhanced AI tool integration
-- **Search Functionality** - Codebase search and navigation
-- **File Locking System** - Prevents conflicts during AI code generation
-- **Diff View** - Visual representation of AI-made changes
-- **Git Integration** - Clone, import, and deployment capabilities
-- **Expo App Creation** - React Native development support
-- **Voice Prompting** - Audio input for prompts
-- **Bulk Chat Operations** - Delete multiple chats at once
-- **Project Snapshot Restoration** - Restore projects from snapshots on reload
-
-### 🔄 In Progress / Planned
-- **File Locking & Diff Improvements** - Enhanced conflict prevention
-- **Backend Agent Architecture** - Move from single model calls to agent-based system
-- **LLM Prompt Optimization** - Better performance for smaller models
-- **Project Planning Documentation** - LLM-generated project plans in markdown
-- **VSCode Integration** - Git-like confirmations and workflows
-- **Document Upload for Knowledge** - Reference materials and coding style guides
-- **Additional Provider Integrations** - Azure OpenAI, Vertex AI, Granite
-
-## Features
-
-- **AI-powered full-stack web development** for **NodeJS based applications** directly in your browser.
-- **Support for 19+ LLMs** with an extensible architecture to integrate additional models.
-- **Attach images to prompts** for better contextual understanding.
-- **Integrated terminal** to view output of LLM-run commands.
-- **Revert code to earlier versions** for easier debugging and quicker changes.
-- **Download projects as ZIP** for easy portability and sync to a folder on the host.
-- **Integration-ready Docker support** for a hassle-free setup.
-- **Deploy directly** to **Netlify**, **Vercel**, or **GitHub Pages**.
-- **Electron desktop app** for native desktop experience.
-- **Data visualization and analysis** with integrated charts and graphs.
-- **Git integration** with clone, import, and deployment capabilities.
-- **MCP (Model Context Protocol)** support for enhanced AI tool integration.
-- **Search functionality** to search through your codebase.
-- **File locking system** to prevent conflicts during AI code generation.
-- **Diff view** to see changes made by the AI.
-- **Supabase integration** for database management and queries.
-- **Expo app creation** for React Native development.
-
-## Setup
-
-If you're new to installing software from GitHub, don't worry! If you encounter any issues, feel free to submit an "issue" using the provided links or improve this documentation by forking the repository, editing the instructions, and submitting a pull request. The following instruction will help you get the stable branch up and running on your local machine in no time.
-
-Let's get you up and running with the stable version of Bolt.DIY!
-
-## Quick Installation
-
-[![Download Latest Release](https://img.shields.io/github/v/release/stackblitz-labs/bolt.diy?label=Download%20Bolt&sort=semver)](https://github.com/stackblitz-labs/bolt.diy/releases/latest) ← Click here to go to the latest release version!
-
-- Download the binary for your platform (available for Windows, macOS, and Linux)
-- **Note**: For macOS, if you get the error "This app is damaged", run:
-  ```bash
-  xattr -cr /path/to/Bolt.app
-  ```
-
-## Manual installation
-
-
-### Option 1: Node.js
-
-Node.js is required to run the application.
-
-1. Visit the [Node.js Download Page](https://nodejs.org/en/download/)
-2. Download the "LTS" (Long Term Support) version for your operating system
-3. Run the installer, accepting the default settings
-4. Verify Node.js is properly installed:
-   - **For Windows Users**:
-     1. Press `Windows + R`
-     2. Type "sysdm.cpl" and press Enter
-     3. Go to "Advanced" tab → "Environment Variables"
-     4. Check if `Node.js` appears in the "Path" variable
-   - **For Mac/Linux Users**:
-     1. Open Terminal
-     2. Type this command:
-        ```bash
-        echo $PATH
-        ```
-     3. Look for `/usr/local/bin` in the output
-
-## Running the Application
-
-You have two options for running Bolt.DIY: directly on your machine or using Docker.
-
-### Option 1: Direct Installation (Recommended for Beginners)
-
-1. **Install Package Manager (pnpm)**:
-
-   ```bash
-   npm install -g pnpm
-   ```
-
-2. **Install Project Dependencies**:
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Start the Application**:
-
-   ```bash
-   pnpm run dev
-   ```
-   
-### Option 2: Using Docker
-
-This option requires some familiarity with Docker but provides a more isolated environment.
-
-#### Additional Prerequisite
-
-- Install Docker: [Download Docker](https://www.docker.com/)
-
-#### Steps:
-
-1. **Build the Docker Image**:
-
-   ```bash
-   # Using npm script:
-   npm run dockerbuild
-
-   # OR using direct Docker command:
-   docker build . --target bolt-ai-development
-   ```
-
-2. **Run the Container**:
-   ```bash
-   docker compose --profile development up
-   ```
-
-### Option 3: Desktop Application (Electron)
-
-For users who prefer a native desktop experience, bolt.diy is also available as an Electron desktop application:
-
-1. **Download the Desktop App**:
-   - Visit the [latest release](https://github.com/stackblitz-labs/bolt.diy/releases/latest)
-   - Download the appropriate binary for your operating system
-   - For macOS: Extract and run the `.dmg` file
-   - For Windows: Run the `.exe` installer
-   - For Linux: Extract and run the AppImage or install the `.deb` package
-
-2. **Alternative**: Build from Source:
-   ```bash
-   # Install dependencies
-   pnpm install
-
-   # Build the Electron app
-   pnpm electron:build:dist  # For all platforms
-   # OR platform-specific:
-   pnpm electron:build:mac   # macOS
-   pnpm electron:build:win   # Windows
-   pnpm electron:build:linux # Linux
-   ```
-
-The desktop app provides the same full functionality as the web version with additional native features.
-
-## Configuring API Keys and Providers
-
-Bolt.diy features a modern, intuitive settings interface for managing AI providers and API keys. The settings are organized into dedicated panels for easy navigation and configuration.
-
-### Accessing Provider Settings
-
-1. **Open Settings**: Click the settings icon (⚙️) in the sidebar to access the settings panel
-2. **Navigate to Providers**: Select the "Providers" tab from the settings menu
-3. **Choose Provider Type**: Switch between "Cloud Providers" and "Local Providers" tabs
-
-### Cloud Providers Configuration
-
-The Cloud Providers tab displays all cloud-based AI services in an organized card layout:
-
-#### Adding API Keys
-1. **Select Provider**: Browse the grid of available cloud providers (OpenAI, Anthropic, Google, etc.)
-2. **Toggle Provider**: Use the switch to enable/disable each provider
-3. **Set API Key**:
-   - Click the provider card to expand its configuration
-   - Click on the "API Key" field to enter edit mode
-   - Paste your API key and press Enter to save
-   - The interface shows real-time validation with green checkmarks for valid keys
-
-#### Advanced Features
-- **Bulk Toggle**: Use "Enable All Cloud" to toggle all cloud providers at once
-- **Visual Status**: Green checkmarks indicate properly configured providers
-- **Provider Icons**: Each provider has a distinctive icon for easy identification
-- **Descriptions**: Helpful descriptions explain each provider's capabilities
-
-### Local Providers Configuration
-
-The Local Providers tab manages local AI installations and custom endpoints:
-
-#### Ollama Configuration
-1. **Enable Ollama**: Toggle the Ollama provider switch
-2. **Configure Endpoint**: Set the API endpoint (defaults to `http://127.0.0.1:11434`)
-3. **Model Management**:
-   - View all installed models with size and parameter information
-   - Update models to latest versions with one click
-   - Delete unused models
-   - Install new models by entering model names
-
-#### Other Local Providers
-- **LM Studio**: Configure custom base URLs for LM Studio endpoints
-- **OpenAI-like**: Connect to any OpenAI-compatible API endpoint
-- **Auto-detection**: The system automatically detects environment variables for base URLs
-
-### Environment Variables vs UI Configuration
-
-Bolt.diy supports both methods for maximum flexibility:
-
-#### Environment Variables (Recommended for Production)
-Set API keys and base URLs in your `.env.local` file:
+# Gen Bolt
+
+[![Gen Bolt: AI-Powered Full-Stack Web Development in the Browser](./public/social_preview_index.jpg)](https://github.com/Hailer367/Gen-Bolt)
+
+Welcome to **Gen Bolt**, a comprehensive AI-powered web development platform based on bolt.diy. Gen Bolt allows you to choose from 19+ different LLM providers for each prompt, giving you unprecedented flexibility in AI-assisted development!
+
+## 🚀 Features
+
+Gen Bolt includes **ALL** the features from the original bolt.diy:
+
+### 🤖 AI Provider Support (19+ Providers)
+- **OpenAI** - GPT-4, GPT-3.5 Turbo, and latest models
+- **Anthropic** - Claude 3 Opus, Sonnet, and Haiku
+- **Google** - Gemini Pro and Ultra models
+- **Groq** - Ultra-fast inference
+- **xAI** - Grok models
+- **DeepSeek** - Advanced coding models
+- **Mistral** - European AI models
+- **Cohere** - Enterprise-grade models
+- **Together AI** - Open source model hosting
+- **Perplexity** - Search-augmented AI
+- **HuggingFace** - Access to thousands of models
+- **Ollama** - Local model execution
+- **LM Studio** - Local model management
+- **OpenRouter** - Meta routing for multiple providers
+- **Moonshot (Kimi)** - Chinese AI models  
+- **Hyperbolic** - High-performance inference
+- **GitHub Models** - GitHub-hosted AI models
+- **Amazon Bedrock** - AWS managed AI services
+- **OpenAI-like APIs** - Custom provider support
+
+### 💻 Development Features
+- **Web-based IDE** - Full code editor with syntax highlighting
+- **Terminal Integration** - Built-in terminal for command execution
+- **File Management** - Complete file system operations
+- **Live Preview** - Real-time application preview
+- **Git Integration** - Version control built-in
+- **Project Templates** - Quick project scaffolding
+
+### 🔧 Advanced Capabilities
+- **WebContainer API** - Browser-based Node.js runtime
+- **Multi-language Support** - JavaScript, TypeScript, Python, HTML, CSS, and more
+- **Package Management** - npm, yarn, pnpm support
+- **Build Systems** - Vite, Webpack, Parcel integration
+- **Database Integration** - Supabase support for data persistence
+- **Deployment Ready** - One-click deployment to multiple platforms
+
+### 🖥️ Desktop & Cloud
+- **Electron Desktop App** - Native desktop experience
+- **Cloud Deployment** - Deploy to Netlify, Vercel, GitHub Pages
+- **Docker Support** - Containerized deployment options
+- **MCP Integration** - Model Context Protocol support
+
+## 🏗️ Deployment on Render
+
+Gen Bolt is optimized for deployment on **Render** with the following configuration:
+
+### Build Command
 ```bash
-# API Keys
-OPENAI_API_KEY=your_openai_key_here
-ANTHROPIC_API_KEY=your_anthropic_key_here
-
-# Custom Base URLs
-OLLAMA_BASE_URL=http://127.0.0.1:11434
-LMSTUDIO_BASE_URL=http://127.0.0.1:1234
+npm install && npm run build
 ```
 
-#### UI-Based Configuration
-- **Real-time Updates**: Changes take effect immediately
-- **Secure Storage**: API keys are stored securely in browser cookies
-- **Visual Feedback**: Clear indicators show configuration status
-- **Easy Management**: Edit, view, and manage keys through the interface
+### Start Command  
+```bash
+npm start
+```
 
-### Provider-Specific Features
+### Environment Variables
+Gen Bolt requires API keys for the AI providers you want to use. Set these in Render's Environment tab:
 
-#### OpenRouter
-- **Free Models Filter**: Toggle to show only free models when browsing
-- **Pricing Information**: View input/output costs for each model
-- **Model Search**: Fuzzy search through all available models
+```bash
+# Essential AI Providers
+OPENAI_API_KEY=your_openai_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key_here
 
-#### Ollama
-- **Model Installer**: Built-in interface to install new models
-- **Progress Tracking**: Real-time download progress for model updates
-- **Model Details**: View model size, parameters, and quantization levels
-- **Auto-refresh**: Automatically detects newly installed models
+# Optional Providers (add as needed)
+GROQ_API_KEY=your_groq_api_key_here
+MISTRAL_API_KEY=your_mistral_api_key_here
+COHERE_API_KEY=your_cohere_api_key_here
+# ... add other provider keys as needed
 
-#### Search & Navigation
-- **Fuzzy Search**: Type-ahead search across all providers and models
-- **Keyboard Navigation**: Use arrow keys and Enter to navigate quickly
-- **Clear Search**: Press `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux) to clear search
+# Application Settings
+NODE_ENV=production
+PORT=10000
+```
 
-### Troubleshooting
+### Render Service Configuration
+1. **Service Type**: Web Service
+2. **Build Command**: `npm install && npm run build`  
+3. **Start Command**: `npm start`
+4. **Node Version**: 18+ (specified in package.json engines)
+5. **Health Check**: Automatic via port binding
 
-#### Common Issues
-- **API Key Not Recognized**: Ensure you're using the correct API key format for each provider
-- **Base URL Issues**: Verify the endpoint URL is correct and accessible
-- **Model Not Loading**: Check that the provider is enabled and properly configured
-- **Environment Variables Not Working**: Restart the application after adding new environment variables
+## 🛠️ Local Development
 
-#### Status Indicators
-- 🟢 **Green Checkmark**: Provider properly configured and ready to use
-- 🔴 **Red X**: Configuration missing or invalid
-- 🟡 **Yellow Indicator**: Provider enabled but may need additional setup
-- 🔵 **Blue Pencil**: Click to edit configuration
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, or pnpm
 
-### Supported Providers Overview
+### Quick Start
+```bash
+# Clone the repository
+git clone https://github.com/Hailer367/Gen-Bolt.git
+cd Gen-Bolt
 
-#### Cloud Providers
-- **OpenAI** - GPT-4, GPT-3.5, and other OpenAI models
-- **Anthropic** - Claude 3.5 Sonnet, Claude 3 Opus, and other Claude models
-- **Google (Gemini)** - Gemini 1.5 Pro, Gemini 1.5 Flash, and other Gemini models
-- **Groq** - Fast inference with Llama, Mixtral, and other models
-- **xAI** - Grok models including Grok-2 and Grok-2 Vision
-- **DeepSeek** - DeepSeek Coder and other DeepSeek models
-- **Mistral** - Mixtral, Mistral 7B, and other Mistral models
-- **Cohere** - Command R, Command R+, and other Cohere models
-- **Together AI** - Various open-source models
-- **Perplexity** - Sonar models for search and reasoning
-- **HuggingFace** - Access to HuggingFace model hub
-- **OpenRouter** - Unified API for multiple model providers
-- **Moonshot (Kimi)** - Kimi AI models
-- **Hyperbolic** - High-performance model inference
-- **GitHub Models** - Models available through GitHub
-- **Amazon Bedrock** - AWS managed AI models
+# Install dependencies
+npm install
 
-#### Local Providers
-- **Ollama** - Run open-source models locally with advanced model management
-- **LM Studio** - Local model inference with LM Studio
-- **OpenAI-like** - Connect to any OpenAI-compatible API endpoint
+# Copy environment file
+cp .env.example .env.local
 
-> **💡 Pro Tip**: Start with OpenAI or Anthropic for the best results, then explore other providers based on your specific needs and budget considerations.
+# Add your API keys to .env.local
+# Edit .env.local with your favorite editor
 
-## Setup Using Git (For Developers only)
+# Start development server
+npm run dev
+```
 
-This method is recommended for developers who want to:
+The application will be available at `http://localhost:3000`
 
-- Contribute to the project
-- Stay updated with the latest changes
-- Switch between different versions
-- Create custom modifications
+### Development Scripts
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production  
+npm run start        # Start production server
+npm run test         # Run tests
+npm run lint         # Lint code
+npm run typecheck    # TypeScript type checking
+```
 
-#### Prerequisites
+## 🔑 API Key Configuration
 
-1. Install Git: [Download Git](https://git-scm.com/downloads)
+Gen Bolt supports multiple ways to configure API keys:
 
-#### Initial Setup
+### Option 1: Environment Variables (.env.local)
+Create `.env.local` file in the project root:
+```bash
+OPENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here
+# Add other providers as needed
+```
 
-1. **Clone the Repository**:
+### Option 2: In-App Configuration
+1. Start the application
+2. Go to Settings → Providers
+3. Enable desired providers and enter API keys
+4. Keys are stored securely in browser storage
 
-   ```bash
-   git clone -b stable https://github.com/stackblitz-labs/bolt.diy.git
-   ```
+## 🚀 Deployment Options
 
-2. **Navigate to Project Directory**:
+### Render (Recommended)
+1. Fork this repository
+2. Connect to Render
+3. Set build command: `npm install && npm run build`
+4. Set start command: `npm start`
+5. Add environment variables
+6. Deploy!
 
-   ```bash
-   cd bolt.diy
-   ```
+### Other Platforms
+- **Vercel**: `npm run deploy:vercel`
+- **Netlify**: `npm run deploy:netlify`  
+- **GitHub Pages**: `npm run deploy:github`
+- **Docker**: `docker-compose up`
 
-3. **Install Dependencies**:
+## 🤝 Contributing
 
-   ```bash
-   pnpm install
-   ```
+Gen Bolt welcomes contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-4. **Start the Development Server**:
-   ```bash
-   pnpm run dev
-   ```
+### Areas for Contribution
+- New AI provider integrations
+- UI/UX improvements
+- Performance optimizations
+- Bug fixes and testing
+- Documentation improvements
 
-5. **(OPTIONAL)** Switch to the Main Branch if you want to use pre-release/testbranch:
-   ```bash
-   git checkout main
-   pnpm install
-   pnpm run dev
-   ```
-  Hint: Be aware that this can have beta-features and more likely got bugs than the stable release
+## 📋 Tech Stack
 
->**Open the WebUI to test (Default: http://localhost:5173)**
->   - Beginners: 
->     - Try to use a sophisticated Provider/Model like Anthropic with Claude Sonnet 3.x Models to get best results
->     - Explanation: The System Prompt currently implemented in bolt.diy cant cover the best performance for all providers and models out there. So it works better with some models, then other, even if the models itself are perfect for >programming
->     - Future: Planned is a Plugin/Extentions-Library so there can be different System Prompts for different Models, which will help to get better results
+- **Frontend**: React, TypeScript, Remix
+- **Styling**: UnoCSS, Tailwind CSS
+- **Build**: Vite, ESBuild
+- **AI Integration**: Vercel AI SDK
+- **Code Editor**: CodeMirror 6
+- **Terminal**: xterm.js
+- **Runtime**: WebContainer API
+- **Desktop**: Electron
+- **Database**: Supabase (optional)
 
-#### Staying Updated
+## 🔗 Links
 
-To get the latest changes from the repository:
+- **GitHub**: [https://github.com/Hailer367/Gen-Bolt](https://github.com/Hailer367/Gen-Bolt)
+- **Original Project**: [bolt.diy](https://github.com/stackblitz-labs/bolt.diy)
+- **Documentation**: See project wiki and code comments
+- **Issues**: [GitHub Issues](https://github.com/Hailer367/Gen-Bolt/issues)
 
-1. **Save Your Local Changes** (if any):
+## 📄 License
 
-   ```bash
-   git stash
-   ```
+MIT License - see [LICENSE](./LICENSE) file for details.
 
-2. **Pull Latest Updates**:
+## 🙏 Acknowledgments
 
-   ```bash
-   git pull 
-   ```
-
-3. **Update Dependencies**:
-
-   ```bash
-   pnpm install
-   ```
-
-4. **Restore Your Local Changes** (if any):
-   ```bash
-   git stash pop
-   ```
-
-#### Troubleshooting Git Setup
-
-If you encounter issues:
-
-1. **Clean Installation**:
-
-   ```bash
-   # Remove node modules and lock files
-   rm -rf node_modules pnpm-lock.yaml
-
-   # Clear pnpm cache
-   pnpm store prune
-
-   # Reinstall dependencies
-   pnpm install
-   ```
-
-2. **Reset Local Changes**:
-   ```bash
-   # Discard all local changes
-   git reset --hard origin/main
-   ```
-
-Remember to always commit your local changes or stash them before pulling updates to avoid conflicts.
+Gen Bolt is built upon the excellent foundation of [bolt.diy](https://github.com/stackblitz-labs/bolt.diy) by the bolt.diy community. We extend our gratitude to all contributors who made this possible.
 
 ---
 
-## Available Scripts
-
-- **`pnpm run dev`**: Starts the development server.
-- **`pnpm run build`**: Builds the project.
-- **`pnpm run start`**: Runs the built application locally using Wrangler Pages.
-- **`pnpm run preview`**: Builds and runs the production build locally.
-- **`pnpm test`**: Runs the test suite using Vitest.
-- **`pnpm run typecheck`**: Runs TypeScript type checking.
-- **`pnpm run typegen`**: Generates TypeScript types using Wrangler.
-- **`pnpm run deploy`**: Deploys the project to Cloudflare Pages.
-- **`pnpm run lint`**: Runs ESLint to check for code issues.
-- **`pnpm run lint:fix`**: Automatically fixes linting issues.
-- **`pnpm run clean`**: Cleans build artifacts and cache.
-- **`pnpm run prepare`**: Sets up husky for git hooks.
-- **Docker Scripts**:
-  - **`pnpm run dockerbuild`**: Builds the Docker image for development.
-  - **`pnpm run dockerbuild:prod`**: Builds the Docker image for production.
-  - **`pnpm run dockerrun`**: Runs the Docker container.
-  - **`pnpm run dockerstart`**: Starts the Docker container with proper bindings.
-- **Electron Scripts**:
-  - **`pnpm electron:build:deps`**: Builds Electron main and preload scripts.
-  - **`pnpm electron:build:main`**: Builds the Electron main process.
-  - **`pnpm electron:build:preload`**: Builds the Electron preload script.
-  - **`pnpm electron:build:renderer`**: Builds the Electron renderer.
-  - **`pnpm electron:build:unpack`**: Creates an unpacked Electron build.
-  - **`pnpm electron:build:mac`**: Builds for macOS.
-  - **`pnpm electron:build:win`**: Builds for Windows.
-  - **`pnpm electron:build:linux`**: Builds for Linux.
-  - **`pnpm electron:build:dist`**: Builds for all platforms.
-
----
-
-## Contributing
-
-We welcome contributions! Check out our [Contributing Guide](CONTRIBUTING.md) to get started.
-
----
-
-## Roadmap
-
-Explore upcoming features and priorities on our [Roadmap](https://roadmap.sh/r/ottodev-roadmap-2ovzo).
-
----
-
-## FAQ
-
-For answers to common questions, issues, and to see a list of recommended models, visit our [FAQ Page](FAQ.md).
-
-
-# Licensing
-**Who needs a commercial WebContainer API license?**
-
-bolt.diy source code is distributed as MIT, but it uses WebContainers API that [requires licensing](https://webcontainers.io/enterprise) for production usage in a commercial, for-profit setting. (Prototypes or POCs do not require a commercial license.) If you're using the API to meet the needs of your customers, prospective customers, and/or employees, you need a license to ensure compliance with our Terms of Service. Usage of the API in violation of these terms may result in your access being revoked.
-# Test commit to trigger Security Analysis workflow
+**Made with ❤️ for the developer community**

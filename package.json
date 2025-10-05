@@ -1,14 +1,14 @@
 {
-  "name": "bolt",
-  "description": "An AI Agent",
+  "name": "gen-bolt",
+  "description": "Gen Bolt - AI-powered web development platform",
   "private": true,
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
   "version": "1.0.0",
   "author": {
-    "name": "bolt.diy team",
-    "email": "maintainers@bolt.diy"
+    "name": "Hailer367",
+    "email": "maintainer@genbolt.dev"
   },
   "scripts": {
     "build": "remix vite:build",
@@ -23,6 +23,9 @@
     "typegen": "wrangler types",
     "prepare": "husky",
     "clean": "node scripts/clean.js",
+    "render:build": "npm install && npm run build",
+    "render:start": "npm start",
+    "heroku-postbuild": "npm run build",
     "electron:dev": "node scripts/electron-dev.mjs",
     "electron:dev:inspect": "NODE_ENV=development electron --inspect=9229 build/electron/main/index.mjs",
     "electron:build:deps": "concurrently \"pnpm electron:build:main\" \"pnpm electron:build:preload\" --kill-others-on-fail",
@@ -36,7 +39,8 @@
     "electron:build:dist": "rm -rf dist && pnpm electron:build:renderer && pnpm electron:build:deps && electron-builder --mwl"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=18.18.0",
+    "npm": ">=8.0.0"
   },
   "dependencies": {
     "@ai-sdk/amazon-bedrock": "1.0.6",

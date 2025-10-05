@@ -6,7 +6,10 @@ import { Header } from '~/components/header/Header';
 import BackgroundRays from '~/components/ui/BackgroundRays';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Bolt' }, { name: 'description', content: 'Talk with Bolt, an AI assistant from StackBlitz' }];
+  return [
+    { title: 'Gen Bolt - AI-Powered Web Development Platform' }, 
+    { name: 'description', content: 'Gen Bolt: Build full-stack web applications with AI assistance. Choose from 19+ AI providers including OpenAI, Anthropic, Google, and more.' }
+  ];
 };
 
 export const loader = () => json({});

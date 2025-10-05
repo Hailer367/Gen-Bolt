@@ -87,10 +87,12 @@ PORT=10000
 
 ### Render Service Configuration
 1. **Service Type**: Web Service
-2. **Build Command**: `npm install && npm run build`  
+2. **Build Command**: `npm install --legacy-peer-deps && npm run build`  
 3. **Start Command**: `npm start`
 4. **Node Version**: 18+ (specified in package.json engines)
 5. **Health Check**: Automatic via port binding
+
+**Important Note**: Use `--legacy-peer-deps` flag for npm to resolve peer dependency conflicts between Remix and Wrangler versions.
 
 ## 🛠️ Local Development
 
@@ -152,10 +154,12 @@ ANTHROPIC_API_KEY=your_key_here
 ### Render (Recommended)
 1. Fork this repository
 2. Connect to Render
-3. Set build command: `npm install && npm run build`
+3. Set build command: `npm install --legacy-peer-deps && npm run build`
 4. Set start command: `npm start`
-5. Add environment variables
+5. Add environment variables (see list above)
 6. Deploy!
+
+**Note**: If you encounter peer dependency conflicts during build, ensure you use the `--legacy-peer-deps` flag with npm install.
 
 ### Other Platforms
 - **Vercel**: `npm run deploy:vercel`

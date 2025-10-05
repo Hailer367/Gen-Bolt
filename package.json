@@ -23,7 +23,7 @@
     "typegen": "wrangler types",
     "prepare": "husky",
     "clean": "node scripts/clean.js",
-    "render:build": "npm install && npm run build",
+    "render:build": "npm install --legacy-peer-deps && npm run build",
     "render:start": "npm start",
     "heroku-postbuild": "npm run build",
     "electron:dev": "node scripts/electron-dev.mjs",

@@ -1,4 +1,7 @@
-import { cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, vitePlugin as remixVitePlugin } from '@remix-run/dev';
+import { 
+  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, 
+  vitePlugin as remixVitePlugin 
+} from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
@@ -6,7 +9,7 @@ import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import * as dotenv from 'dotenv';
 
-// Load environment variables from multiple files
+// 🧠 Load environment variables from multiple .env files
 dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '.env' });
 dotenv.config();
@@ -30,6 +33,8 @@ export default defineConfig((config) => {
         protocolImports: true,
         exclude: ['child_process', 'fs', 'path'],
       }),
+
+      // 👇 Automatically add Buffer to env.mjs
       {
         name: 'buffer-polyfill',
         transform(code, id) {
@@ -39,10 +44,11 @@ export default defineConfig((config) => {
               map: null,
             };
           }
-
           return null;
         },
       },
+
+      // Remix + Cloudflare integration
       config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
         future: {
@@ -52,11 +58,13 @@ export default defineConfig((config) => {
           v3_lazyRouteDiscovery: true,
         },
       }),
+
       UnoCSS(),
       tsconfigPaths(),
       chrome129IssuePlugin(),
       config.mode === 'production' && optimizeCssModules({ apply: 'build' }),
     ],
+
     envPrefix: [
       'VITE_',
       'OPENAI_LIKE_API_BASE_URL',
@@ -65,6 +73,7 @@ export default defineConfig((config) => {
       'LMSTUDIO_API_BASE_URL',
       'TOGETHER_API_BASE_URL',
     ],
+
     css: {
       preprocessorOptions: {
         scss: {
@@ -72,6 +81,26 @@ export default defineConfig((config) => {
         },
       },
     },
+
+    // ✅ Server Configuration — This is the important part
+    server: {
+      host: true, // required to allow external access in Docker/Bolt
+      port: 3000,
+
+      // 🔒 Allow Bolt/Render hosts
+      allowedHosts: [
+        "bolt-diy-1ck5.onrender.com", // your current deployment host
+        ".onrender.com",              // wildcard for Render
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0",
+        "*", // optional fallback — allows dynamic hosts
+      ],
+
+      // Optional: reduce noisy warnings in logs
+      strictPort: false,
+    },
+
     test: {
       exclude: [
         '**/node_modules/**',
@@ -79,32 +108,29 @@ export default defineConfig((config) => {
         '**/cypress/**',
         '**/.{idea,git,cache,output,temp}/**',
         '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
-        '**/tests/preview/**', // Exclude preview tests that require Playwright
+        '**/tests/preview/**',
       ],
     },
   };
 });
 
+// 🧩 Fix Chrome 129 local dev bug
 function chrome129IssuePlugin() {
   return {
     name: 'chrome129IssuePlugin',
     configureServer(server: ViteDevServer) {
       server.middlewares.use((req, res, next) => {
         const raw = req.headers['user-agent']?.match(/Chrom(e|ium)\/([0-9]+)\./);
-
         if (raw) {
           const version = parseInt(raw[2], 10);
-
           if (version === 129) {
             res.setHeader('content-type', 'text/html');
             res.end(
-              '<body><h1>Please use Chrome Canary for testing.</h1><p>Chrome 129 has an issue with JavaScript modules & Vite local development, see <a href="https://github.com/stackblitz/bolt.new/issues/86#issuecomment-2395519258">for more information.</a></p><p><b>Note:</b> This only impacts <u>local development</u>. `pnpm run build` and `pnpm run start` will work fine in this browser.</p></body>',
+              '<body><h1>Please use Chrome Canary for testing.</h1><p>Chrome 129 has an issue with JavaScript modules & Vite local development. See <a href="https://github.com/stackblitz/bolt.new/issues/86#issuecomment-2395519258">details</a>.</p></body>'
             );
-
             return;
           }
         }
-
         next();
       });
     },

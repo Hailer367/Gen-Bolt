@@ -1,6 +1,6 @@
-import { 
-  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, 
-  vitePlugin as remixVitePlugin 
+import {
+  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
+  vitePlugin as remixVitePlugin,
 } from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, type ViteDevServer } from 'vite';
@@ -34,7 +34,7 @@ export default defineConfig((config) => {
         exclude: ['child_process', 'fs', 'path'],
       }),
 
-      // 👇 Automatically add Buffer to env.mjs
+      // 👇 Automatically add Buffer import to env.mjs
       {
         name: 'buffer-polyfill',
         transform(code, id) {
@@ -48,7 +48,7 @@ export default defineConfig((config) => {
         },
       },
 
-      // Remix + Cloudflare integration
+      // 🌀 Remix + Cloudflare Integration
       config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
         future: {
@@ -82,25 +82,34 @@ export default defineConfig((config) => {
       },
     },
 
-    // ✅ Server Configuration — This is the important part
+    // ✅ Server Configuration (Important)
     server: {
-      host: true, // required to allow external access in Docker/Bolt
+      host: true, // allow access from Docker / Render / Codespaces
       port: 3000,
+      strictPort: false,
 
-      // 🔒 Allow Bolt/Render hosts
+      // ✅ Permanent fix: Allow all subdomains automatically
       allowedHosts: [
-        "bolt-diy-1ck5.onrender.com", // your current deployment host
-        ".onrender.com",              // wildcard for Render
-        "localhost",
-        "127.0.0.1",
-        "0.0.0.0",
-        "*", // optional fallback — allows dynamic hosts
+        "*", // Allows any Render/Bolt/Codespace host dynamically
       ],
 
-      // Optional: reduce noisy warnings in logs
-      strictPort: false,
+      // ✅ Enable CORS for dev environments
+      cors: true,
+
+      // Optional quality-of-life improvements
+      watch: {
+        usePolling: true, // helps with file changes in Docker/VMs
+      },
     },
 
+    // ✅ Optional Preview config (when running vite preview)
+    preview: {
+      port: 4173,
+      allowedHosts: ["*"],
+      host: true,
+    },
+
+    // ✅ Testing config
     test: {
       exclude: [
         '**/node_modules/**',
@@ -114,7 +123,7 @@ export default defineConfig((config) => {
   };
 });
 
-// 🧩 Fix Chrome 129 local dev bug
+// 🧩 Fix for Chrome 129 dev issue
 function chrome129IssuePlugin() {
   return {
     name: 'chrome129IssuePlugin',
